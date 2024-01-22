@@ -107,10 +107,10 @@ func (s *optiiApi) doRequest(req *http.Request, retry bool) (*http.Response, err
 			resp.Body.Close()
 			return s.doRequest(req, false)
 		}
-		return nil, fmt.Errorf("autenticação falhou, não é possível repetir a solicitação")
+		return nil, fmt.Errorf("auth failed, status code: %d", resp.StatusCode)
 	default:
 		resp.Body.Close()
-		return nil, fmt.Errorf("resposta falhou, código de status: %d", resp.StatusCode)
+		return nil, fmt.Errorf("request failed, status code: %d", resp.StatusCode)
 	}
 }
 
